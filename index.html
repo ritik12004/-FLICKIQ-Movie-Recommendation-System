@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlickIQ — AI-Powered Film Discovery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- ── HEADER ── -->
+    <header class="header">
+      <div class="header-label">AI-Powered Film Discovery</div>
+      <div class="header-title">FLICK<span>IQ</span></div>
+      <p class="header-sub">Enter a film title to discover movies with similar themes, genres, and storytelling.</p>
+    </header>
+
+    <!-- ── SEARCH ── -->
+    <section class="search-wrap">
+      <div class="search-field">
+        <span class="search-icon">⌕</span>
+        <input
+          id="searchInput"
+          class="search-input"
+          type="text"
+          placeholder="e.g. The Dark Knight, Inception, Parasite…"
+          autocomplete="off"
+        />
+        <div class="suggestions" id="suggestions"></div>
+      </div>
+      <button class="btn-primary" id="searchBtn">FIND FILMS</button>
+    </section>
+
+    <!-- ── CONTROLS ── -->
+    <div class="controls">
+      <span class="ctrl-label">Results</span>
+      <div class="count-btns" id="countBtns">
+        <button class="count-btn" data-n="5">5</button>
+        <button class="count-btn active" data-n="10">10</button>
+        <button class="count-btn" data-n="15">15</button>
+        <button class="count-btn" data-n="20">20</button>
+      </div>
+    </div>
+
+    <!-- ── STATUS ── -->
+    <div class="status-bar" id="statusBar" style="display:none;">
+      <div class="status-dot"></div>
+      <span id="statusMsg"></span>
+    </div>
+
+    <!-- ── ERROR ── -->
+    <div class="error-msg" id="errorMsg" style="display:none;">
+      <span>⚠</span>
+      <span id="errorText"></span>
+    </div>
+
+    <!-- ── NOW SHOWING (searched movie) ── -->
+    <div class="now-showing" id="nowShowing" style="display:none;">
+      <div id="nowPoster"></div>
+      <div>
+        <div class="now-label">Because you searched</div>
+        <div class="now-title" id="nowTitle"></div>
+        <div class="now-meta" id="nowMeta"></div>
+      </div>
+    </div>
+
+    <!-- ── RESULTS ── -->
+    <section class="results-section">
+      <div class="results-header" id="resultsHeader" style="display:none;">
+        <div class="results-title">RECOMMENDED FILMS</div>
+        <div class="results-count" id="resultsCount"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+
+      <!-- Empty / Welcome state -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">🎞</div>
+        <div class="empty-title">READY TO DISCOVER</div>
+        <p class="empty-msg">Type any movie title above and hit <strong>FIND FILMS</strong> to get personalized recommendations powered by FlickIQ's TF-IDF engine.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ── MODAL ── -->
+  <div class="modal-backdrop" id="modalBackdrop" style="display:none;">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div id="modalImg"></div>
+      <div class="modal-body">
+        <div class="modal-genre" id="modalGenre"></div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-meta" id="modalMeta"></div>
+        <div class="modal-overview" id="modalOverview"></div>
+        <button class="modal-recommend-btn" id="modalRecommendBtn">FIND SIMILAR TO THIS FILM</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# virtual environment
+venv/
+.venv/
+
+# cache files
+__pycache__/
+*.pyc
+
+# vscode settings
+.vscode/
+
+# env file
+.env
+
+# notebook checkpoints
+.ipynb_checkpoints/
