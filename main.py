@@ -8,7 +8,6 @@ import httpx
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
@@ -212,14 +211,16 @@ async def recommend_tfidf(
 
 
 # =========================
-# ROOT ROUTE - SERVE UI
+# SERVE UI FILES
 # =========================
 @app.get("/")
 def root():
     return FileResponse(os.path.join(BASE_DIR, "index.html"))
 
+@app.get("/style.css")
+def serve_css():
+    return FileResponse(os.path.join(BASE_DIR, "style.css"), media_type="text/css")
 
-# =========================
-# STATIC FILES (CSS, JS)
-# =========================
-app.mount("/static", StaticFiles(directory=BASE_DIR), name="static")
+@app.get("/app.js")
+def serve_js():
+    return FileResponse(os.path.join(BASE_DIR, "app.js"), media_type="application/javascript")
