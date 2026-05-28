@@ -2,7 +2,7 @@
    FLICKIQ — app.js
    ───────────────────────────────────────── */
 
-const API_BASE   = "http://localhost:8000";
+const API_BASE   =  "https://flickiq-movie-recommendation-system-1.onrender.com";
 const TMDB_IMG   = "https://image.tmdb.org/t/p/w500";
 const TMDB_BG    = "https://image.tmdb.org/t/p/w780";
 
