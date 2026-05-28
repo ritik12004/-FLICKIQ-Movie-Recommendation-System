@@ -8,6 +8,8 @@ import httpx
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
@@ -17,7 +19,6 @@ from dotenv import load_dotenv
 # =========================
 load_dotenv()
 
-# FIXED HERE 
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 
 TMDB_BASE = "https://api.themoviedb.org/3"
@@ -144,7 +145,6 @@ def load_pickles():
     if isinstance(indices_obj, dict):
         for k, v in indices_obj.items():
             TITLE_TO_IDX[_norm_title(k)] = int(v)
-
     else:
         for k, v in indices_obj.items():
             TITLE_TO_IDX[_norm_title(k)] = int(v)
@@ -212,10 +212,14 @@ async def recommend_tfidf(
 
 
 # =========================
-# ROOT ROUTE
+# ROOT ROUTE - SERVE UI
 # =========================
 @app.get("/")
 def root():
-    return {
-        "message": "Movie Recommendation API Running Successfully 🚀"
-    }
+    return FileResponse(os.path.join(BASE_DIR, "index.html"))
+
+
+# =========================
+# STATIC FILES (CSS, JS)
+# =========================
+app.mount("/static", StaticFiles(directory=BASE_DIR), name="static")
